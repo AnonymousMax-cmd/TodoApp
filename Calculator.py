@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+import os
+
 app = Flask(__name__, template_folder='.')
 
 # In-memory task list (not persistent)
@@ -22,5 +24,8 @@ def delete(task_id):
         tasks.pop(task_id)
     return redirect(url_for("index"))
 
+# ... your Flask app setup code ...
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
